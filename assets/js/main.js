@@ -1,95 +1,248 @@
-const fields = document.querySelectorAll("[required]");
-
-function ValidateField (field) {
-    //  logica para verificar se existem erros
-    function verifyErrors() {
-        let foundError = false;
-
-        for(const error in field.validity) {
-            // se não for customError
-            // então verifica se tem erro
-            if (field.validity[error] && !field.validity.valid) {
-                foundError = error;
-            }
-        }
-        return foundError;
-    }
-
-    function customMessage(typeError) {
-        const messages = {
-            text: {
-                valueMissing: "Por favor, preencha este campo"
-            },
-            email: {
-                valueMissing: "Email é Obrigatório",
-                typeMismatch: "Por favor, insira um email válido!"
-            }
-        }
-
-        return messages[field.type][typeError]
-    }
-
-    function setCustomMessage(message) {
-        const spanError = field.parentNode.querySelector("span.error");
-
-        if (message) {
-            spanError.classList.add("active");
-            spanError.innerHTML = message
-        } else {
-            spanError.classList.remove("active");
-            spanError.innerHTML = ""
-        }
-
+document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('.input-bottom-line, .textarea-bottom-line');
+            
+            inputs.forEach(input => {
+                if (input.value) {
+                    input.parentElement.classList.add('has-value');
+                }
+                
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.classList.remove('focused');
+                    if (this.value) {
+                        this.parentElement.classList.add('has-value');
+                    } else {
+                        this.parentElement.classList.remove('has-value');
+                    }
+                });
+                
+                input.addEventListener('input', function() {
+                    if (this.tagName === 'TEXTAREA') {
+                        this.style.height = 'auto';
+                        this.style.height = (this.scrollHeight) + 'px';
+                    }
+                });
+            });
+            
+            const visitForm = document.getElementById('visitForm');
+            const privacyCheckbox = document.getElementById('privacyPolicy');
+            
+            visitForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                let isValid = true;
+                const requiredFields = visitForm.querySelectorAll('[required]');
+                
+                requiredFields.forEach(field => {
+                    const inputGroup = field.closest('.input-group-bottom') || field.closest('.checkbox-group');
+                    
+                    if (!field.value && field.type !== 'checkbox') {
+                        isValid = false;
+                        inputGroup.classList.add('error');
+                    } else if (field.type === 'checkbox' && !field.checked) {
+                        isValid = false;
+                        inputGroup.classList.add('error');
+                    } else {
+                        inputGroup.classList.remove('error');
+                    }
+                });
+                
+                if (isValid) {
+                    alert('Solicitação enviada com sucesso! Entraremos em contato em breve para confirmar sua visita.');
+                    visitForm.reset();
+                    
+                    inputs.forEach(input => {
+                        input.parentElement.classList.remove('has-value', 'focused');
+                        if (input.tagName === 'TEXTAREA') {
+                            input.style.height = 'auto';
+                        }
+                    });
+                } else {
+                    alert('Por favor, preencha todos os campos obrigatórios e aceite a política de privacidade.');
+                }
+            });
+            
+            const routeButtons = document.querySelectorAll('.route-btn');
+            
+            routeButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const action = this.textContent.includes('chegar') ? 'traçar rota' : 'ver rotas alternativas';
+                    alert(`Funcionalidade: ${action}. Em uma implementação real, isso abriria o Google Maps ou aplicativo similar.`);
+                });
+            });
+        });
         
-    }
-    return function() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = targetElement.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
 
-        const error = verifyErrors();
+        document.getElementById('scrollTopBtn').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
 
-        if(error) {
+        window.addEventListener('scroll', function() {
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            if (window.scrollY > 300) {
+                scrollTopBtn.style.opacity = '1';
+                scrollTopBtn.style.visibility = 'visible';
+            } else {
+                scrollTopBtn.style.opacity = '0';
+                scrollTopBtn.style.visibility = 'hidden';
+            }
+        });
 
-            const message = customMessage(error);
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            scrollTopBtn.style.opacity = '0';
+            scrollTopBtn.style.visibility = 'hidden';
+            scrollTopBtn.style.transition = 'opacity 0.3s, visibility 0.3s';
+        });
 
-            field.style.borderColor = "red";
-            setCustomMessage(message);
-        } else {
-            field.style.borderColor = "green";
-            setCustomMessage();
-        }
-    }
-}
-
-function customValidation(event) {
-    
-    const field = event.target
-
-    const validation = ValidateField(field);
-
-    validation();
-    
-    // Como vamos estilizar a mensagem de error, esse if else não faz mais sentido. ele pode ser ativado se tirarmos o event.preventDefault() da função customValidation()
-    // if (error) {
-    //     // trocar mensagem de required
-    //     field.setCustomValidity("Esse campo é obrigatório!");
-    // } else {
-    //     field.setCustomValidity("");
-    // }    
-}
-
-for (field of fields) {
-    field.addEventListener("invalid", event => {
-        // eliminar o bubble
-        event.preventDefault();
-
-        customValidation(event);
-    });
-    field.addEventListener("blur", customValidation);
-}
-
-document.querySelector("form")
-.addEventListener("submit", event => {
-    console.log("enviar o formulário")
-
-    // O preventDefault faz com que o formulário não seja enviado
-    event.preventDefault()
-})
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryCarouselTrack = document.getElementById('galleryCarouselTrack');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const galleryPrevBtn = document.getElementById('galleryPrevBtn');
+            const galleryNextBtn = document.getElementById('galleryNextBtn');
+            const galleryIndicators = document.querySelectorAll('.gallery-indicator');
+            
+            let currentGalleryIndex = 2;
+            const totalGalleryItems = galleryItems.length;
+            
+            updateGalleryCarousel();
+            
+            function updateGalleryCarousel() {
+                const itemWidth = 100 / 3;
+                const offset = -currentGalleryIndex * itemWidth;
+                
+                galleryCarouselTrack.style.transform = `translateX(${offset}%)`;
+                
+                galleryItems.forEach((item, index) => {
+                    item.classList.remove('active');
+                    if (index === currentGalleryIndex) {
+                        item.classList.add('active');
+                    }
+                });
+                
+                galleryIndicators.forEach((indicator, index) => {
+                    indicator.classList.remove('active');
+                    if (index === currentGalleryIndex) {
+                        indicator.classList.add('active');
+                    }
+                });
+                
+                galleryPrevBtn.disabled = currentGalleryIndex === 0;
+                galleryNextBtn.disabled = currentGalleryIndex === totalGalleryItems - 1;
+            }
+            
+            galleryNextBtn.addEventListener('click', function() {
+                if (currentGalleryIndex < totalGalleryItems - 1) {
+                    currentGalleryIndex++;
+                    updateGalleryCarousel();
+                }
+            });
+            
+            galleryPrevBtn.addEventListener('click', function() {
+                if (currentGalleryIndex > 0) {
+                    currentGalleryIndex--;
+                    updateGalleryCarousel();
+                }
+            });
+            
+            galleryIndicators.forEach(indicator => {
+                indicator.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    currentGalleryIndex = index;
+                    updateGalleryCarousel();
+                });
+            });
+            
+            let isDragging = false;
+            let startPos = 0;
+            
+            galleryCarouselTrack.addEventListener('mousedown', dragStart);
+            galleryCarouselTrack.addEventListener('touchstart', dragStart);
+            
+            galleryCarouselTrack.addEventListener('mousemove', drag);
+            galleryCarouselTrack.addEventListener('touchmove', drag);
+            
+            galleryCarouselTrack.addEventListener('mouseup', dragEnd);
+            galleryCarouselTrack.addEventListener('mouseleave', dragEnd);
+            galleryCarouselTrack.addEventListener('touchend', dragEnd);
+            
+            function dragStart(event) {
+                if (event.type === 'touchstart') {
+                    startPos = event.touches[0].clientX;
+                } else {
+                    startPos = event.clientX;
+                    event.preventDefault();
+                }
+                
+                isDragging = true;
+                galleryCarouselTrack.style.transition = 'none';
+            }
+            
+            function drag(event) {
+                if (!isDragging) return;
+                
+                let currentPosition = 0;
+                if (event.type === 'touchmove') {
+                    currentPosition = event.touches[0].clientX;
+                } else {
+                    currentPosition = event.clientX;
+                }
+                
+                const diff = currentPosition - startPos;
+                
+                if (currentGalleryIndex === 0 && diff > 50) return;
+                if (currentGalleryIndex === totalGalleryItems - 1 && diff < -50) return;
+                
+                galleryCarouselTrack.style.transform = `translateX(calc(${-currentGalleryIndex * (100/3)}% + ${diff/10}%))`;
+            }
+            
+            function dragEnd(event) {
+                if (!isDragging) return;
+                
+                isDragging = false;
+                galleryCarouselTrack.style.transition = 'transform 0.5s ease-in-out';
+                
+                let endPos = 0;
+                if (event.type === 'touchend') {
+                    endPos = event.changedTouches[0].clientX;
+                } else {
+                    endPos = event.clientX;
+                }
+                
+                const diff = endPos - startPos;
+                
+                if (diff < -50 && currentGalleryIndex < totalGalleryItems - 1) {
+                    currentGalleryIndex++;
+                } else if (diff > 50 && currentGalleryIndex > 0) {
+                    currentGalleryIndex--;
+                }
+                
+                updateGalleryCarousel();
+            }
+        });
