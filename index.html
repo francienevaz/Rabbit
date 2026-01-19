@@ -7,12 +7,14 @@
     <meta name="description" content="Matrículas 2026 abertas! Escola infantil com ambiente dinâmico, lúdico e tecnologia educacional que une aprendizado e diversão.">
     <meta name="keywords" content="escola infantil, educação, matrículas 2026, ensino lúdico, tecnologia educacional">
     <meta name="author" content="Escola Infantil">
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
 </head>
 <body>
     <header>
@@ -62,7 +64,10 @@
             
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <div class="carousel-bg" style="background-image: url('assets/images/slide.png');"></div>
+                     <!-- Imagem desktop -->
+                    <div class="carousel-bg carousel-bg-desktop" style="background-image: url('assets/images/slide.png');"></div>
+                    <!-- Imagem mobile -->
+                    <div class="carousel-bg carousel-bg-mobile" style="background-image: url('assets/images/slide-mobile.png');"></div>
                     <div class="cloud-bottom"></div>
                     
                     <div class="carousel-content">
@@ -594,8 +599,8 @@
             </div>
         </div>
     </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script> -->
     <script src="./assets/js/main.js"></script>
 </body>
 </html>

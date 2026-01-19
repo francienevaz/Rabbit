@@ -1,72 +1,110 @@
-/* Large Desktops */
-@media (min-width: 1200px) {
-    .container {
-        max-width: 1140px;
-    }
-    
-    h1 {
-        font-size: 3rem;
-    }
-}
+        /* @media (max-width: 600px) {
+            .hero-carousel .carousel-item.active .carousel-bg[style*="slide.png"] {
+                background-image: url('assets/images/slide-mobile.png') !important;
+            }
+        } */
+        
+        @media (max-width: 768px) {
+            .segmento-card {
+                padding: 25px 20px;
+            }
+            
+            .segmento-icon {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .segmento-icon img {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .segmento-title {
+                font-size: 1.3rem;
+            }
+            
+            .segmento-cta-text {
+                font-size: 1.1rem;
+            }
+        }
 
-/* Tablets and Small Desktops */
-@media (max-width: 991.98px) {
-    .carousel-item {
-        height: 60vh;
-    }
-    
-    .navbar-nav {
-        text-align: center;
-        padding: 1rem 0;
-    }
-    
-    .nav-item {
-        margin: 0.5rem 0;
-    }
-}
 
-/* Mobile Devices */
-@media (max-width: 767.98px) {
-    .carousel-item {
-        height: 50vh;
-        min-height: 400px;
-    }
-    
-    .carousel-caption {
-        padding: 1rem;
-        bottom: 10%;
-    }
-    
-    h1 {
-        font-size: 2rem;
-    }
-    
-    h2 {
-        font-size: 1.75rem;
-    }
-    
-    .feature-item {
-        margin-bottom: 1.5rem;
-    }
-    
-    .footer .col-md-4 {
-        margin-bottom: 2rem;
-    }
-}
+        @media (max-width: 1000px) {
+            header {
+                background-image: none !important;
+                background-color: var(--light-color);
+                height: auto;
+                padding: 10px 0;
+            }
+        }
 
-/* Small Mobile Devices */
-@media (max-width: 575.98px) {
-    .carousel-item {
-        height: 40vh;
-        min-height: 300px;
-    }
-    
-    .navbar-brand {
-        font-size: 1.5rem;
-    }
-    
-    .btn {
-        width: 100%;
-        margin-bottom: 0.5rem;
-    }
-}
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .feature-box {
+                margin-bottom: 30px;
+            }
+            
+            .contact-form {
+                padding: 30px 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .btn-enroll, .btn-platform, .btn-submit {
+                padding: 10px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .gallery-item {
+                flex: 0 0 50%;
+            }
+            
+            .gallery-item.active .gallery-card {
+                transform: scale(1.1);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-item {
+                flex: 0 0 100%;
+            }
+            
+            .gallery-item.active .gallery-card {
+                transform: scale(1.05);
+            }
+        }

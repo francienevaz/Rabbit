@@ -73,14 +73,12 @@
             width: 80%;
         }
         
-        /* Hero Section como Carousel */
         .hero-section {
             position: relative;
-            margin-top: 76px; /* Altura do header fixo */
+            margin-top: 76px;
             overflow: hidden;
         }
         
-        /* Ajustes no Carousel */
         .hero-carousel {
             height: 85vh;
             min-height: 600px;
@@ -113,6 +111,24 @@
             height: 100%;
             background: linear-gradient(135deg, rgba(43, 182, 168, 0.85) 0%, rgba(245, 88, 93, 0.8) 100%);
             z-index: 1;
+        }
+
+        .carousel-bg-mobile {
+            display: none;
+        }
+
+        .carousel-bg-desktop {
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .carousel-bg-desktop {
+                display: none;
+            }
+            
+            .carousel-bg-mobile {
+                display: block;
+            }
         }
         
         .cloud-bottom {
@@ -184,8 +200,7 @@
             color: var(--light-color);
             box-shadow: 0 6px 20px rgba(255, 204, 0, 0.6);
         }
-        
-        /* Controles do carousel */
+
         .carousel-control-prev, .carousel-control-next {
             width: 60px;
             height: 60px;
@@ -211,7 +226,6 @@
             filter: invert(1);
         }
         
-        /* Indicadores do carousel */
         .carousel-indicators {
             bottom: 40px;
             z-index: 10;
@@ -229,8 +243,7 @@
         .carousel-indicators button.active {
             background-color: var(--accent-color);
         }
-        
-        /* Animação */
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -241,8 +254,7 @@
                 transform: translateY(0);
             }
         }
-        
-        /* Seções*/
+
         .section {
             padding: 80px 0;
         }
@@ -311,32 +323,7 @@
             color: #666;
             line-height: 1.6;
         }
-        
-        .environment-section {
-            background-color: var(--light-color);
-            position: relative;
-        }
-        
-        .environment-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('assets/images/environment-bg.png');
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.05;
-            z-index: 1;
-        }
-        
-        .environment-content {
-            position: relative;
-            z-index: 2;
-        }
 
-        /* Seção Segmentos */
         .segmentos-section {
             background-color: var(--light-color);
         }
@@ -445,33 +432,7 @@
             line-height: 1.6;
         }
 
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .segmento-card {
-                padding: 25px 20px;
-            }
-            
-            .segmento-icon {
-                width: 70px;
-                height: 70px;
-            }
-            
-            .segmento-icon img {
-                width: 45px;
-                height: 45px;
-            }
-            
-            .segmento-title {
-                font-size: 1.3rem;
-            }
-            
-            .segmento-cta-text {
-                font-size: 1.1rem;
-            }
-        }
 
-
-        /* Secao ambiente */
         .section-env-title {
             font-size: 2.5rem;
             font-weight: 700;
@@ -513,7 +474,6 @@
             padding: 40px 0;
         }
         
-        /* Classes renomeadas para evitar conflito */
         .gallery-item {
             flex: 0 0 34%;
             padding: 0 15px;
@@ -594,7 +554,7 @@
         }
         
         .gallery-btn:hover {
-            background-color: #3a7cff;
+            background-color: var(--secondary-color);
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(77, 139, 255, 0.4);
         }
@@ -628,8 +588,6 @@
             transform: scale(1.2);
         }
         
-        
-        /* Seção tecnologia */
         .tech-section {
             background: var(--primary-color);
             position: relative;
@@ -716,7 +674,6 @@
             box-shadow: 0 5px 15px rgba(77, 139, 255, 0.4);
         }
         
-        /* Seção contato */
         .visit-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -764,7 +721,6 @@
             overflow: hidden;
         }
         
-        /* Estilos para o formulário com label flutuante */
         .input-group-bottom {
             position: relative;
             margin-bottom: 35px;
@@ -798,7 +754,6 @@
             border-bottom-color: var(--primary-color);
         }
 
-        /* Efeito de label flutuante quando o input está em foco ou preenchido */
         .input-bottom-line:focus ~ .input-label,
         .input-bottom-line:not(:placeholder-shown) ~ .input-label,
         .input-bottom-line.has-value ~ .input-label {
@@ -815,7 +770,6 @@
             color: var(--primary-color);
         }
 
-        /* Estilo para campos obrigatórios inválidos */
         .input-bottom-line:invalid:not(:focus):not(:placeholder-shown) ~ .input-label,
         .textarea-bottom-line:invalid:not(:focus):not(:placeholder-shown) ~ .input-label {
             color: #ff4757;
@@ -826,13 +780,11 @@
             border-bottom-color: #ff4757;
         }
 
-        /* Placeholder transparente */
         .input-bottom-line::placeholder,
         .textarea-bottom-line::placeholder {
             color: transparent;
         }
 
-        /* Para navegadores antigos que não suportam :placeholder-shown */
         .input-bottom-line:focus ~ .input-label,
         .input-bottom-line.has-value ~ .input-label {
             top: -10px;
@@ -847,7 +799,6 @@
             color: var(--primary-color);
         }
         
-        /* Checkbox personalizado */
         .checkbox-group {
             margin: 30px 0 40px;
             display: flex;
@@ -895,7 +846,6 @@
             font-size: 14px;
         }
         
-        /* Botão de envio */
         .submit-btn {
             background-color: var(--primary-color);
             color: white;
@@ -918,8 +868,7 @@
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(77, 139, 255, 0.4);
         }
-        
-        /* Seção do mapa */
+
         .address-info {
             margin-bottom: 30px;
 
@@ -1050,50 +999,7 @@
                 width: 100%;
             }
         }
-        
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .visit-content {
-                flex-direction: column;
-            }
-            
-            .visit-header {
-                padding: 30px 20px;
-            }
-            
-            .visit-title {
-                font-size: 2.2rem;
-            }
-            
-            .visit-subtitle {
-                font-size: 1.2rem;
-            }
-            
-            .form-section, .map-section {
-                padding: 30px 20px;
-            }
-            
-            .route-buttons {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .submit-btn {
-                max-width: 100%;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .visit-title {
-                font-size: 1.8rem;
-            }
-            
-            .visit-subtitle {
-                font-size: 1rem;
-            }
-        }
-        
-        /* Footer */
+
         .footer {
             position: relative;
             background-color: var(--primary-color);
@@ -1210,85 +1116,3 @@
             background-color: rgba(255, 255, 255, 0.2);
         }
                         
-        
-        /* Responsividade */
-
-        @media (max-width: 1000px) {
-            header {
-                background-image: none !important;
-                background-color: var(--light-color);
-                height: auto;
-                padding: 10px 0;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .hero-title {
-                font-size: 2.8rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.5rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.2rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.3rem;
-            }
-            
-            .section {
-                padding: 60px 0;
-            }
-            
-            .feature-box {
-                margin-bottom: 30px;
-            }
-            
-            .contact-form {
-                padding: 30px 20px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .hero-title {
-                font-size: 1.8rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .btn-enroll, .btn-platform, .btn-submit {
-                padding: 10px 25px;
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .gallery-item {
-                flex: 0 0 50%;
-            }
-            
-            .gallery-item.active .gallery-card {
-                transform: scale(1.1);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .gallery-item {
-                flex: 0 0 100%;
-            }
-            
-            .gallery-item.active .gallery-card {
-                transform: scale(1.05);
-            }
-        }
